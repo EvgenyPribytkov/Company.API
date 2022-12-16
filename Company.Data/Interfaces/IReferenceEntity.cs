@@ -1,5 +1,5 @@
 ﻿namespace Company.Data.Interfaces;
 
-public class IReferenceEntity
+public interface IReferenceEntity
 {
 }

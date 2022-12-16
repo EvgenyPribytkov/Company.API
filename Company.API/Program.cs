@@ -55,3 +55,4 @@ void RegisteredServices(IServiceCollection services)
 {
     services.AddScoped<IDbService, DbService>();
 }
+

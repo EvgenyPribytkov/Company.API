@@ -1,6 +1,6 @@
 ﻿namespace Company.Data.Interfaces;
 
-public class IEntity
+public interface IEntity
 {
     int Id { get; set; }
 }

@@ -1,18 +1,9 @@
-﻿using AutoMapper;
-using Company.Common.DTOs;
-using Company.Data.Contexts;
-using Company.Data.Entities;
-using Company.Data.Interfaces;
-using Company.Data.Services;
-using Microsoft.EntityFrameworkCore;
-
-namespace Company.API.Controllers;
+﻿namespace Company.API.Controllers;
 [ApiController]
 [Route("api/[controller]")]
 public class OrganisationsController : ControllerBase
 {
     private readonly IDbService _db;
-    private readonly IMapper _mapper;
 
     public OrganisationsController(IDbService db)
     {
@@ -37,21 +28,5 @@ public class OrganisationsController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IResult> Delete(int id)
         => await _db.HttpDeleteAsync<Organisation>(id);
-
-    //[HttpDelete]
-    //public async Task<IResult> Delete(EmployeesJobTitleDTO dto)
-    //{
-    //    try
-    //    {
-    //        if (!_db.Delete<EmployeesJobTitle, EmployeesJobTitleDTO>(dto))
-    //            return Results.NotFound();
-    //        if (await db.SaveChangesAsync()) return Results.NoContent();
-    //    }
-    //    catch (Exception)
-    //    {
-    //        return Results.BadRequest($"Couldn't delete the {typeof(EmployeesJobTitle).Name} entity.");
-    //    }
-    //    return Results.BadRequest($"Couldn't delete the {typeof(EmployeesJobTitle).Name} entity.");
-    //}
 }
 

@@ -45,6 +45,14 @@ public class DbService : IDbService
         await _db.Set<TEntity>().AddAsync(entity);
         return entity;
     }
+    public async Task<TReferenceEntity> HttpAddAsync<TReferenceEntity, TDto>(TDto dto)
+    where TReferenceEntity : class, IReferenceEntity
+    where TDto : class
+    {
+        var entity = _mapper.Map<TReferenceEntity>(dto);
+        await _db.Set<TReferenceEntity>().AddAsync(entity);
+        return entity;
+    }
 
     public async Task<bool> SaveChangesAsync() => 
         await _db.SaveChangesAsync() >= 0;

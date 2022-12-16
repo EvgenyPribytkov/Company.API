@@ -30,5 +30,7 @@ public interface IDbService
     bool Delete<TReferenceEntity, TDto>(TDto dto)
         where TReferenceEntity: class, IReferenceEntity
         where TDto : class;
-
+    Task<TReferenceEntity> HttpAddAsync<TReferenceEntity, TDto>(TDto dto)
+    where TReferenceEntity : class, IReferenceEntity
+    where TDto : class;
 }

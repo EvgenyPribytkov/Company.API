@@ -34,6 +34,21 @@ public static class HttpExtensions
         return Results.BadRequest();
     }
 
+    public static async Task<IResult> HttpAddAsync<TReferenceEntity, TDto>(this IDbService db, TDto dto) 
+        where TReferenceEntity : class, IReferenceEntity 
+        where TDto : class
+    {
+        try
+        {
+            var entity = await db.HttpAddAsync<TReferenceEntity, TDto>(dto);
+            if (await db.SaveChangesAsync()) return Results.NoContent();
+        }
+        catch (Exception ex)
+        {
+            return Results.BadRequest($"Couldn't add the {typeof(TReferenceEntity).Name} entity.\n{ex}.");
+        }
+            return Results.BadRequest($"Couldn't add the {typeof(TReferenceEntity).Name} entity.");
+    }
     public async static Task<IResult> HttpPutAsync<TEntity, TDto>(this IDbService db, int id, TDto dto)
     where TEntity : class, IEntity
     where TDto : class
@@ -68,10 +83,25 @@ public static class HttpExtensions
         return Results.BadRequest();
     }
 
+    public async static Task<IResult> HttpDeleteAsync<TReferenceEntity, TDto>(this IDbService db, TDto dto)
+        where TReferenceEntity : class, IReferenceEntity
+        where TDto : class
+    {
+        try
+        {
+            var success = db.Delete<TReferenceEntity, TDto>(dto);
 
+            if (await db.SaveChangesAsync())
+                return Results.NoContent();
+        }
+        catch (Exception)
+        {
+            throw;
+        }
 
-
-
+        return Results.BadRequest();
+    }
+ 
     //public async Task<IResult> HttpDeleteAsync<TReferenceEntity>
     //{
     //    try

@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Company.Common.DTOs;
+﻿namespace Company.Common.DTOs;
 
 public class EmployeeDTO
 {
@@ -9,4 +7,5 @@ public class EmployeeDTO
     public string? LastName { get; set; }
     public decimal Salary { get; set; }
     public bool IsUnionMember { get; set; }
+    public int DepartmentId { get; set; }
 }

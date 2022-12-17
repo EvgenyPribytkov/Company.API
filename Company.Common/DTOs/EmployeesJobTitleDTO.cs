@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Design;
-namespace Company.Common.DTOs; 
+﻿namespace Company.Common.DTOs; 
 public class EmployeesJobTitleDTO 
 {
     public int EmployeeId { get; set; }

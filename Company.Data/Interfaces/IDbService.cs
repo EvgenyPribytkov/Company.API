@@ -1,6 +1,4 @@
-﻿using Company.Common.DTOs;
-using System.Linq.Expressions;
-namespace Company.Data.Interfaces;
+﻿namespace Company.Data.Interfaces;
 
 public interface IDbService
 {

@@ -1,12 +1,4 @@
 ﻿namespace Company.Data.Services;
-using Company.Data.Contexts;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using AutoMapper;
-using Company.Data.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
-using System;
 
 public class DbService : IDbService 
 {

@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Company.Common.DTOs;
+﻿namespace Company.Common.DTOs;
 
 public class JobTitleDTO
 {

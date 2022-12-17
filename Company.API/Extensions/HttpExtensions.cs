@@ -34,7 +34,7 @@ public static class HttpExtensions
         return Results.BadRequest();
     }
 
-    public static async Task<IResult> HttpAddAsync<TReferenceEntity, TDto>(this IDbService db, TDto dto) 
+    public static async Task<IResult> HttpAddAsyncReference<TReferenceEntity, TDto>(this IDbService db, TDto dto) 
         where TReferenceEntity : class, IReferenceEntity 
         where TDto : class
     {
@@ -70,7 +70,7 @@ public static class HttpExtensions
     {
         try
         {
-        var success = await db.DeleteAsync<IEntity>(id);
+        var success = await db.DeleteAsync<TEntity>(id);
 
         if (await db.SaveChangesAsync())
             return Results.NoContent();
@@ -101,26 +101,4 @@ public static class HttpExtensions
 
         return Results.BadRequest();
     }
- 
-    //public async Task<IResult> HttpDeleteAsync<TReferenceEntity>
-    //{
-    //    try
-    //    {
-    //        if (!_db.Delete<EmployeesJobTitle, EmployeesJobTitleDTO>)
-    //            return Results.NotFound();
-    //        if (await db.SaveChangesAsync()) return Results.NoContent();
-    //    }
-    //    catch (Exception)
-    //    {
-    //        return Results.BadRequest($"Couldn't delete the {typeof(EmployeesJobTitle).Name} entity.");
-    //    }
-    //    return Results.BadRequest($"Couldn't delete the {typeof(EmployeesJobTitle).Name} entity.");
-    //}
-    //public static async Task<IResult> HttpGetAsync<TEntity, TDto>(this IDbService db)
-    //    where TEntity : class, IEntity
-    //    where TDto : class
-    //{
-    //    var entities = await db.GetAsync<TEntity, TDto>;
-    //    return Results.Ok(entities);
-    //}
 }

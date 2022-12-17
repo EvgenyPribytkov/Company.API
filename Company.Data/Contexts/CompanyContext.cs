@@ -1,9 +1,4 @@
-﻿using Company.Data.Entities;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.ComponentModel.DataAnnotations;
-using System.Xml.Linq;
-
-namespace Company.Data.Contexts;
+﻿namespace Company.Data.Contexts;
 
 public class CompanyContext : DbContext
 {

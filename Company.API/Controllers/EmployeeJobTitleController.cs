@@ -1,6 +1,4 @@
-﻿using Company.API.Extensions;
-
-namespace Company.API.Controllers;
+﻿namespace Company.API.Controllers;
 [ApiController]
 [Route("api/[controller]")]
 public class EmployeeJobTitleController
@@ -13,7 +11,7 @@ public class EmployeeJobTitleController
     }
     [HttpPost]
     public async Task<IResult> Post([FromBody] EmployeesJobTitleDTO dto)
-    => await _db.HttpAddAsync<EmployeesJobTitle, EmployeesJobTitleDTO>(dto);
+    => await _db.HttpAddAsyncReference<EmployeesJobTitle, EmployeesJobTitleDTO>(dto);
 
     [HttpDelete]
     public async Task<IResult> Delete(EmployeesJobTitleDTO dto)

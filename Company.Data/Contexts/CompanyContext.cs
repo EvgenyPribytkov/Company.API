@@ -12,6 +12,7 @@ Set<EmployeesJobTitle>();
 : base(options)
     {
     }
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
@@ -19,6 +20,7 @@ Set<EmployeesJobTitle>();
             new { ej.EmployeeId, ej.JobTitleId });
         SeedData(builder);
     }
+
     private void SeedData(ModelBuilder builder)
     {
         var companies = new List<Organisation>
@@ -36,7 +38,7 @@ Set<EmployeesJobTitle>();
                 OrganisationName = "Facebook"
             },
         };
-        builder.Entity<Organisation>().HasData(companies); 
+        builder.Entity<Organisation>().HasData(companies);
         var departments = new List<Department>
         {
             new Department {
@@ -60,6 +62,7 @@ Set<EmployeesJobTitle>();
             OrganisationId = 1
             }
         };
+
         builder.Entity<Department>().HasData(departments);
         var employees = new List<Employee>
         {

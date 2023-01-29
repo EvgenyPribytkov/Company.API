@@ -1,28 +1,31 @@
 ﻿namespace Company.Data.Services;
 
-public class DbService : IDbService 
+public class DbService : IDbService
 {
     private readonly CompanyContext _db;
-	private readonly IMapper _mapper;
+    private readonly IMapper _mapper;
     public DbService(CompanyContext db, IMapper mapper)
-	{
-		_db = db;
-		_mapper = mapper;
-	}
-    public async Task<List<TDto>> GetAsync<TEntity, TDto>() 
+    {
+        _db = db;
+        _mapper = mapper;
+    }
+
+    public async Task<List<TDto>> GetAsync<TEntity, TDto>()
         where TEntity : class, IEntity
         where TDto : class
     {
         var entities = await _db.Set<TEntity>().ToListAsync();
         return _mapper.Map<List<TDto>>(entities);
     }
+
     private async Task<TEntity?> SingleAsync<TEntity>(
         Expression<Func<TEntity, bool>> expression)
         where TEntity : class, IEntity =>
         await _db.Set<TEntity>().SingleOrDefaultAsync(expression);
+
     public async Task<TDto> SingleAsync<TEntity, TDto>(
         Expression<Func<TEntity, bool>> expression)
-        where TEntity: class, IEntity
+        where TEntity : class, IEntity
         where TDto : class
     {
         var entity = await SingleAsync(expression);
@@ -37,6 +40,7 @@ public class DbService : IDbService
         await _db.Set<TEntity>().AddAsync(entity);
         return entity;
     }
+
     public async Task<TReferenceEntity> HttpAddAsync<TReferenceEntity, TDto>(TDto dto)
     where TReferenceEntity : class, IReferenceEntity
     where TDto : class
@@ -46,7 +50,7 @@ public class DbService : IDbService
         return entity;
     }
 
-    public async Task<bool> SaveChangesAsync() => 
+    public async Task<bool> SaveChangesAsync() =>
         await _db.SaveChangesAsync() >= 0;
 
     public string GetURI<TEntity>(TEntity entity)
@@ -62,6 +66,7 @@ public class DbService : IDbService
         entity.Id = id;
         _db.Set<TEntity>().Update(entity);
     }
+
     public async Task<bool> AnyAsync<TEntity>(
     Expression<Func<TEntity, bool>> expression)
     where TEntity : class, IEntity =>
@@ -82,6 +87,7 @@ public class DbService : IDbService
         }
         return true;
     }
+
     public bool Delete<TReferenceEntity, TDto>(TDto dto)
         where TReferenceEntity : class, IReferenceEntity
         where TDto : class
@@ -89,7 +95,7 @@ public class DbService : IDbService
         try
         {
             var entity = _mapper.Map<TReferenceEntity>(dto);
-            if(entity is null) return false;
+            if (entity is null) return false;
             _db.Remove(entity);
         }
         catch (Exception)

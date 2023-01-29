@@ -7,11 +7,12 @@ namespace Company.API.Extensions;
 public static class HttpExtensions
 {
     public async static Task<IResult> HttpGetAsync<TEntity, TDto>(this IDbService db)
-        where TEntity: class, IEntity
+        where TEntity : class, IEntity
         where TDto : class
     {
         return Results.Ok(await db.GetAsync<TEntity, TDto>());
     }
+
     public async static Task<IResult> HttpGetAsync<TEntity, TDto>(this IDbService db, int id)
     where TEntity : class, IEntity
     where TDto : class
@@ -20,6 +21,7 @@ public static class HttpExtensions
         if (entity == null) return Results.BadRequest();
         return Results.Ok(entity);
     }
+
     public async static Task<IResult> HttpPostAsync<TEntity, TDto>(this IDbService db, TDto dto)
     where TEntity : class, IEntity
     where TDto : class
@@ -34,8 +36,8 @@ public static class HttpExtensions
         return Results.BadRequest();
     }
 
-    public static async Task<IResult> HttpAddAsyncReference<TReferenceEntity, TDto>(this IDbService db, TDto dto) 
-        where TReferenceEntity : class, IReferenceEntity 
+    public static async Task<IResult> HttpAddAsyncReference<TReferenceEntity, TDto>(this IDbService db, TDto dto)
+        where TReferenceEntity : class, IReferenceEntity
         where TDto : class
     {
         try
@@ -47,8 +49,9 @@ public static class HttpExtensions
         {
             return Results.BadRequest($"Couldn't add the {typeof(TReferenceEntity).Name} entity.\n{ex}.");
         }
-            return Results.BadRequest($"Couldn't add the {typeof(TReferenceEntity).Name} entity.");
+        return Results.BadRequest($"Couldn't add the {typeof(TReferenceEntity).Name} entity.");
     }
+
     public async static Task<IResult> HttpPutAsync<TEntity, TDto>(this IDbService db, int id, TDto dto)
     where TEntity : class, IEntity
     where TDto : class
@@ -70,10 +73,10 @@ public static class HttpExtensions
     {
         try
         {
-        var success = await db.DeleteAsync<TEntity>(id);
+            var success = await db.DeleteAsync<TEntity>(id);
 
-        if (await db.SaveChangesAsync())
-            return Results.NoContent();
+            if (await db.SaveChangesAsync())
+                return Results.NoContent();
         }
         catch (Exception)
         {

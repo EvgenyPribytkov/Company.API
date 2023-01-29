@@ -2,7 +2,7 @@
 
 [ApiController]
 [Route("api/[controller]")]
-    public class JobTitleController
+public class JobTitleController : ControllerBase
 {
     private readonly IDbService _db;
 

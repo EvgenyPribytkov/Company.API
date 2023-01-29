@@ -1,7 +1,7 @@
 ﻿namespace Company.API.Controllers;
 [ApiController]
 [Route("api/[controller]")]
-public class DepartmentController
+public class DepartmentController : ControllerBase
 {
     private readonly IDbService _db;
 
